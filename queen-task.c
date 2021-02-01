@@ -34,7 +34,9 @@ void showFieldState(char field)
 
 void showBoard(char board[8][8])
 {
+    printf("    a b c d e f g h\n");
     for (int i = 0; i < 8; i++){
+        printf("%d :", i + 1);
         for (int j = 0; j < 8; j++) {
             showFieldState(board[i][j]);
         }
