@@ -141,18 +141,11 @@ int step(char board[8][8], char x, char y, char level)
     else {
         return 0;
     }
-
 }
 
 int main()
 {
     printf("Start\n");
-    showBoard(boards[0]);
-    Field q = getNearestNextEmpty(boards[0], 0, 0);
-    markSetQueen(boards[0], q.x, q.y);
-    markThreatened(boards[0], q.x, q.y);
-    printf("\n");
-    showBoard(boards[0]);
 
     /*
     q = getNearestNextEmpty(boards[0], q.x, q.y);
