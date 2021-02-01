@@ -153,31 +153,17 @@ int step(char board[8][8], char x, char y, char level)
 
 int main()
 {
-    printf("Start\n");
-
-    int res = step(boards[0], 0, 0, 0);
-
-    printf(" --- \n");
-    printf("\n");
-    showBoard(boards[0]);
-    printf("\n");
-    showBoard(boards[1]);
-    printf("\n");
-    showBoard(boards[2]);
-    printf("\n");
-    showBoard(boards[3]);
-    printf("\n");
-    showBoard(boards[4]);
-    printf("\n");
-    showBoard(boards[5]);
-    printf("\n");
-    showBoard(boards[6]);
-    printf(" --- \n");
-    printf("Res = %d\n", res);
-    if (res) {
-        for (int i = 0; i < 8; i++) {
-            printf("[%c, %c] ", queens[i].y + 'a', queens[i].x + '1');
+    for (int i = 0; i < 8; i++) {
+        memset(boards, 0, 7 * 8 * 8 * sizeof(char));
+        int res = step(boards[0], i, 0, 0);
+        printf(" --- \n");
+        if (res) {
+            printf("First queen at [%c, %c]:\n", 0 + 'a', i + '1');
+            showBoard(boards[6]);
+            for (int i = 0; i < 8; i++) {
+                printf("[%c, %c] ", queens[i].y + 'a', queens[i].x + '1');
+            }
+            printf("\n");
         }
-        printf("\n");
     }
 }
