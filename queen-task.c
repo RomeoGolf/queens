@@ -110,11 +110,55 @@ int main()
 {
     printf("Start\n");
     showBoard(fields);
-    Field q = getNearestNextEmpty(fields, 3, 4);
+    Field q = getNearestNextEmpty(fields, 0, 0);
     fields[q.x][q.y] = 1;
     markThreatened(fields, q.x, q.y);
     printf("\n");
     showBoard(fields);
+
+    q = getNearestNextEmpty(fields, q.x, q.y);
+    fields[q.x][q.y] = 1;
+    markThreatened(fields, q.x, q.y);
+    printf("\n");
+    showBoard(fields);
+
+    q = getNearestNextEmpty(fields, q.x, q.y);
+    fields[q.x][q.y] = 1;
+    markThreatened(fields, q.x, q.y);
+    printf("\n");
+    showBoard(fields);
+
+    q = getNearestNextEmpty(fields, q.x, q.y);
+    fields[q.x][q.y] = 4;
+    q = getNearestNextEmpty(fields, q.x, q.y);
+    markThreatened(fields, q.x, q.y);
+    printf("\n");
+    showBoard(fields);
+
+    q = getNearestNextEmpty(fields, q.x, q.y);
+    fields[q.x][q.y] = 1;
+    markThreatened(fields, q.x, q.y);
+    printf("\n");
+    showBoard(fields);
+
+    q = getNearestNextEmpty(fields, q.x, q.y);
+    fields[q.x][q.y] = 1;
+    markThreatened(fields, q.x, q.y);
+    printf("\n");
+    showBoard(fields);
+
+    q = getNearestNextEmpty(fields, q.x, q.y);
+    fields[q.x][q.y] = 1;
+    markThreatened(fields, q.x, q.y);
+    printf("\n");
+    showBoard(fields);
+
+    q = getNearestNextEmpty(fields, q.x, q.y);
+    fields[q.x][q.y] = 1;
+    markThreatened(fields, q.x, q.y);
+    printf("\n");
+    showBoard(fields);
+
 }
 
 
