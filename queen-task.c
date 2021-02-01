@@ -66,6 +66,47 @@ Field getNearestNextEmpty(char board[8][8], char x, char y)
     return result;
 }
 
+void markThreatened(char board[8][8], char x, char y)
+{
+    for (int i = x - 1; i >= 0; i--)
+        if (!board[i][y]) board[i][y] = 2;
+    for (int i = x + 1; i < 8; i++)
+        if (!board[i][y]) board[i][y] = 2;
+    for (int j = y - 1; j >= 0; j--)
+        if (!board[x][j]) board[x][j] = 2;
+    for (int j = y + 1; j < 8; j++)
+        if (!board[x][j]) board[x][j] = 2;
+    int i = x - 1;
+    int j = y - 1;
+    while (i >= 0 && j >= 0) {
+        if (!board[i][j]) board[i][j] = 2;
+        i--;
+        j--;
+    }
+    i = x - 1;
+    j = y + 1;
+    while (i >= 0 && j < 8) {
+        if (!board[i][j]) board[i][j] = 2;
+        i--;
+        j++;
+    }
+    i = x + 1;
+    j = y + 1;
+    while (i < 8 && j < 8) {
+        if (!board[i][j]) board[i][j] = 2;
+        i++;
+        j++;
+    }
+    i = x + 1;
+    j = y - 1;
+    while (i < 8 && j >= 0) {
+        if (!board[i][j]) board[i][j] = 2;
+        i++;
+        j--;
+    }
+
+}
+
 int main()
 {
     printf("Start\n");
