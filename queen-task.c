@@ -54,8 +54,8 @@ Field getNearestNextEmpty(char board[8][8], char x, char y)
             return result;
         }
     }
-    for (int i = 0; i < 8; i++)
-        for (int j = y + 1; j < 8; j++)
+    for (int j = y + 1; j < 8; j++)
+        for (int i = 0; i < 8; i++)
         {
             if (!board[i][j]) {
             result.x = i;
