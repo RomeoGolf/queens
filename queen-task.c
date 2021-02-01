@@ -2,9 +2,10 @@
 // queen-task.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include "stdio.h"
+#include <stdio.h>
+#include <string.h>
 
-char fields[8][8];
+char boards[8][8][8];
 
 struct field_struct
 {
@@ -116,58 +117,72 @@ void markThreatened(char board[8][8], char x, char y)
     }
 }
 
+int step(char board[8][8], char x, char y, char level)
+{
+    Field q = getNearestNextEmpty(board, x, y);
+    if (q.x >= 0) {
+        if (level == 7) {
+            markSetQueen(board, q.x, q.y);
+            return 1;
+        }
+
+        int result = 0;
+        while (q.x >= 0) {
+            memcpy(boards[level + 1], board, sizeof(char) * 8 * 8);
+            markSetQueen(boards[level + 1], q.x, q.y);
+            markThreatened(boards[level + 1], q.x, q.y);
+            result = step(boards[level + 1], q.x, q.y, level + 1);
+            if (result) break;
+            markWrongField(board, q.x, q.y);
+            q = getNearestNextEmpty(board, x, y);
+        }
+        return result;
+    }
+    else {
+        return 0;
+    }
+
+}
+
 int main()
 {
     printf("Start\n");
-    showBoard(fields);
-    Field q = getNearestNextEmpty(fields, 0, 0);
-    fields[q.x][q.y] = 1;
-    markThreatened(fields, q.x, q.y);
+    showBoard(boards[0]);
+    Field q = getNearestNextEmpty(boards[0], 0, 0);
+    markSetQueen(boards[0], q.x, q.y);
+    markThreatened(boards[0], q.x, q.y);
     printf("\n");
-    showBoard(fields);
+    showBoard(boards[0]);
 
-    q = getNearestNextEmpty(fields, q.x, q.y);
-    fields[q.x][q.y] = 1;
-    markThreatened(fields, q.x, q.y);
+    /*
+    q = getNearestNextEmpty(boards[0], q.x, q.y);
+    markSetQueen(boards[0], q.x, q.y);
+    markThreatened(boards[0], q.x, q.y);
     printf("\n");
-    showBoard(fields);
+    showBoard(boards[0]);
+    */
 
-    q = getNearestNextEmpty(fields, q.x, q.y);
-    fields[q.x][q.y] = 1;
-    markThreatened(fields, q.x, q.y);
-    printf("\n");
-    showBoard(fields);
+    int res = step(boards[0], 0, 0, 0);
+    printf(" --- \n");
+    printf("Res = %d\n", res);
+    printf(" --- \n");
 
-    q = getNearestNextEmpty(fields, q.x, q.y);
-    fields[q.x][q.y] = 4;
-    q = getNearestNextEmpty(fields, q.x, q.y);
-    markThreatened(fields, q.x, q.y);
     printf("\n");
-    showBoard(fields);
-
-    q = getNearestNextEmpty(fields, q.x, q.y);
-    fields[q.x][q.y] = 1;
-    markThreatened(fields, q.x, q.y);
+    showBoard(boards[0]);
     printf("\n");
-    showBoard(fields);
-
-    q = getNearestNextEmpty(fields, q.x, q.y);
-    fields[q.x][q.y] = 1;
-    markThreatened(fields, q.x, q.y);
+    showBoard(boards[1]);
     printf("\n");
-    showBoard(fields);
-
-    q = getNearestNextEmpty(fields, q.x, q.y);
-    fields[q.x][q.y] = 1;
-    markThreatened(fields, q.x, q.y);
+    showBoard(boards[2]);
     printf("\n");
-    showBoard(fields);
-
-    q = getNearestNextEmpty(fields, q.x, q.y);
-    fields[q.x][q.y] = 1;
-    markThreatened(fields, q.x, q.y);
+    showBoard(boards[3]);
     printf("\n");
-    showBoard(fields);
+    showBoard(boards[4]);
+    printf("\n");
+    showBoard(boards[5]);
+    printf("\n");
+    showBoard(boards[6]);
+    printf("\n");
+    showBoard(boards[7]);
 
 }
 
