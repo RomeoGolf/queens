@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 
-char boards[8][8][8];
+char boards[7][8][8] = { 0 };
 
 struct field_struct
 {
@@ -128,10 +128,10 @@ int step(char board[8][8], char x, char y, char level)
 
         int result = 0;
         while (q.x >= 0) {
-            memcpy(boards[level + 1], board, sizeof(char) * 8 * 8);
-            markSetQueen(boards[level + 1], q.x, q.y);
-            markThreatened(boards[level + 1], q.x, q.y);
-            result = step(boards[level + 1], q.x, q.y, level + 1);
+            memcpy(boards[level], board, sizeof(char) * 8 * 8);
+            markSetQueen(boards[level], q.x, q.y);
+            markThreatened(boards[level], q.x, q.y);
+            result = step(boards[level], q.x, q.y, level + 1);
             if (result) break;
             markWrongField(board, q.x, q.y);
             q = getNearestNextEmpty(board, x, y);
