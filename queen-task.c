@@ -15,6 +15,8 @@ struct field_struct
 
 typedef struct field_struct  Field;
 
+Field queens[8];
+
 void showFieldState(char field)
 {
     switch (field) {
@@ -125,6 +127,8 @@ int step(char board[8][8], char x, char y, char level)
     if (q.x >= 0) {
         if (level == 7) {
             markSetQueen(board, q.x, q.y);
+            queens[7].x = q.x;
+            queens[7].y = q.y;
             return 1;
         }
 
@@ -132,6 +136,8 @@ int step(char board[8][8], char x, char y, char level)
         while (q.x >= 0) {
             memcpy(boards[level], board, sizeof(char) * 8 * 8);
             markSetQueen(boards[level], q.x, q.y);
+            queens[level].x = q.x;
+            queens[level].y = q.y;
             markThreatened(boards[level], q.x, q.y);
             result = step(boards[level], q.x, q.y, level + 1);
             if (result) break;
@@ -149,12 +155,9 @@ int main()
 {
     printf("Start\n");
 
-
     int res = step(boards[0], 0, 0, 0);
-    printf(" --- \n");
-    printf("Res = %d\n", res);
-    printf(" --- \n");
 
+    printf(" --- \n");
     printf("\n");
     showBoard(boards[0]);
     printf("\n");
@@ -169,7 +172,12 @@ int main()
     showBoard(boards[5]);
     printf("\n");
     showBoard(boards[6]);
-    printf("\n");
-    showBoard(boards[7]);
-
+    printf(" --- \n");
+    printf("Res = %d\n", res);
+    if (res) {
+        for (int i = 0; i < 8; i++) {
+            printf("[%c, %c] ", queens[i].y + 'a', queens[i].x + '1');
+        }
+        printf("\n");
+    }
 }
