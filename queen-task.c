@@ -66,6 +66,16 @@ Field getNearestNextEmpty(char board[8][8], char x, char y)
     return result;
 }
 
+inline void markSetQueen(char board[8][8], char x, char y)
+{
+    board[x][y] = 1;
+}
+
+inline void markWrongField(char board[8][8], char x, char y)
+{
+    board[x][y] = 3;
+}
+
 void markThreatened(char board[8][8], char x, char y)
 {
     for (int i = x - 1; i >= 0; i--)
