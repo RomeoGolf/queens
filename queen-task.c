@@ -147,13 +147,6 @@ int main()
 {
     printf("Start\n");
 
-    /*
-    q = getNearestNextEmpty(boards[0], q.x, q.y);
-    markSetQueen(boards[0], q.x, q.y);
-    markThreatened(boards[0], q.x, q.y);
-    printf("\n");
-    showBoard(boards[0]);
-    */
 
     int res = step(boards[0], 0, 0, 0);
     printf(" --- \n");
