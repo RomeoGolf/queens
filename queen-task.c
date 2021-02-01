@@ -161,10 +161,10 @@ int main()
         int res = step(boards[0], i, 0, 0);             /* set the first queen position */
         printf(" --- \n");
         if (res) {
-            printf("First queen at [%c, %c]:\n", 0 + 'a', i + '1');
+            printf("First queen at [%c%c]:\n", 0 + 'a', i + '1');
             showBoard(boards[6]);
             for (int i = 0; i < 8; i++) {
-                printf("[%c, %c] ", queens[i].y + 'a', queens[i].x + '1');
+                printf("[%c%c] ", queens[i].y + 'a', queens[i].x + '1');
             }
             printf("\n");
         }
