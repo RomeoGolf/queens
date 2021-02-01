@@ -104,12 +104,16 @@ void markThreatened(char board[8][8], char x, char y)
         i++;
         j--;
     }
-
 }
 
 int main()
 {
     printf("Start\n");
+    showBoard(fields);
+    Field q = getNearestNextEmpty(fields, 3, 4);
+    fields[q.x][q.y] = 1;
+    markThreatened(fields, q.x, q.y);
+    printf("\n");
     showBoard(fields);
 }
 
