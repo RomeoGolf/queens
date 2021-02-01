@@ -6,6 +6,14 @@
 
 char fields[8][8];
 
+struct field_struct
+{
+    char x;
+    char y;
+};
+
+typedef struct field_struct  Field;
+
 void showFieldState(char field)
 {
     switch (field) {
@@ -31,6 +39,31 @@ void showBoard(char board[8][8])
         }
         printf("\n");
     }
+}
+
+Field getNearestNextEmpty(char board[8][8], char x, char y)
+{
+    Field result;
+    result.x = -1;
+    result.y = -1;
+
+    for (int i = x; i < 8; i++) {
+        if (!board[i][y]) {
+            result.x = i;
+            result.y = y;
+            return result;
+        }
+    }
+    for (int i = 0; i < 8; i++)
+        for (int j = y + 1; j < 8; j++)
+        {
+            if (!board[i][j]) {
+            result.x = i;
+            result.y = j;
+            return result;
+            }
+        }
+    return result;
 }
 
 int main()
