@@ -2,31 +2,34 @@
 #include <stdio.h>
 #include <string.h>
 
+/* the boards buffer for recursion levels */
 char boards[7][8][8] = { 0 };
 
+/* a position on a board */
 struct field_struct
 {
     char x;
     char y;
 };
-
 typedef struct field_struct  Field;
 
+/* the result queens positions */
 Field queens[8];
 
+/* Show a state of a board field */
 void showFieldState(char field)
 {
     switch (field) {
-    case 0:
+    case 0:     /* empty */
         printf(" .");
         break;
-    case 1:
+    case 1:     /* queen position */
         printf(" Q");
         break;
-    case 2:
+    case 2:     /* threatened field*/
         printf(" x");
         break;
-    default:
+    default:    /* other (e. g. wrong) */
         printf("  ");
     }
 }
@@ -43,6 +46,7 @@ void showBoard(char board[8][8])
     }
 }
 
+/* Find a nearest empty safe field on the board started from [x, y] inclusive */
 Field getNearestNextEmpty(char board[8][8], char x, char y)
 {
     Field result;
@@ -78,6 +82,7 @@ inline void markWrongField(char board[8][8], char x, char y)
     board[x][y] = 3;
 }
 
+/* Mark the fields the queen threats from [x, y] */
 void markThreatened(char board[8][8], char x, char y)
 {
     for (int i = x - 1; i >= 0; i--)
@@ -118,6 +123,7 @@ void markThreatened(char board[8][8], char x, char y)
     }
 }
 
+/* Step the recursive search */
 int step(char board[8][8], char x, char y, char level)
 {
     Field q = getNearestNextEmpty(board, x, y);
@@ -151,8 +157,8 @@ int step(char board[8][8], char x, char y, char level)
 int main()
 {
     for (int i = 0; i < 8; i++) {
-        memset(boards, 0, 7 * 8 * 8 * sizeof(char));
-        int res = step(boards[0], i, 0, 0);
+        memset(boards, 0, 7 * 8 * 8 * sizeof(char));    /* clear the boards buffer before new search*/
+        int res = step(boards[0], i, 0, 0);             /* set the first queen position */
         printf(" --- \n");
         if (res) {
             printf("First queen at [%c, %c]:\n", 0 + 'a', i + '1');
