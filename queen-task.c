@@ -30,7 +30,7 @@ void showFieldState(char field)
         printf(" x");
         break;
     default:    /* other (e. g. wrong) */
-        printf("  ");
+        printf(" x");
     }
 }
 
